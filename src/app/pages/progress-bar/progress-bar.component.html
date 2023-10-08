@@ -1,1 +1,58 @@
-<p>progress-bar works!</p>
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Default Progress bar</h4>
+        <div class="progress m-t-20">
+          <div
+            class="progress-bar bg-primary progress-bar-striped active"
+            style="height:15px;"
+            [style.width]="getProgressBarValue1"
+            role="progressbar">
+              {{ getProgressBarValue1 }}
+          </div>
+        </div>
+
+        <div class="progress m-t-20">
+          <div
+            class="progress-bar bg-info progress-bar-striped active"
+            style="height:15px;"
+            [style.width]="getProgressBarValue2"
+            role="progressbar">
+              {{ getProgressBarValue2 }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-6">
+    <div class="card">
+      <div class="card-body">
+
+        <app-increaser
+          [progressBarColorClass]="'btn-primary'"
+          [totalProgressBar]="progressBarValue1"
+          (progressBarValueOutput)="progressBarValue1 = $event">
+        </app-increaser>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-6">
+    <div class="card">
+      <div class="card-body">
+
+        <app-increaser
+          [progressBarColorClass]="'btn-info'"
+          [totalProgressBar]="progressBarValue2"
+          (progressBarValueOutput)="progressBarValue2 = $event">
+        </app-increaser>
+
+      </div>
+    </div>
+  </div>
+</div>

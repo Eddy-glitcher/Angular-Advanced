@@ -7,6 +7,10 @@ import { PagesComponent } from './pages.component';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { PagesRoutingModule } from './pages-routing.module';
+import { FormsModule } from '@angular/forms';
+import { ComponentsModule } from '../components/components.module';
+
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -17,9 +21,12 @@ import { PagesRoutingModule } from './pages-routing.module';
   ],
   imports: [
     CommonModule,
-    PagesRoutingModule,
+    FormsModule,
     RouterModule,
-    SharedModule
+    NgChartsModule,
+    PagesRoutingModule,
+    SharedModule,
+    ComponentsModule
   ],
   exports:[
     DashboardComponent,

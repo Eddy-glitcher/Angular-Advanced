@@ -1,1 +1,31 @@
-<p>grafic1 works!</p>
+<div class="row">
+  <div class="col-6">
+    <div class="card">
+      <div class="card-body">
+
+        <h3>Sales Grafic</h3>
+
+        <canvas
+          baseChart
+          class="chart"
+          [data]="doughnutChartData"
+          [type]="doughnutChartType"
+          >
+        </canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-6">
+    <div class="card">
+      <div class="card-body">
+
+
+        <app-custom-grafic title="Grafica Customizada"  [labels]="labels" [inputProgressData]="inputProgressData"></app-custom-grafic>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+

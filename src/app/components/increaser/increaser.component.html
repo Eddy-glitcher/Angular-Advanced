@@ -1,0 +1,30 @@
+<div class="input-group">
+  <span class="input-group-btn">
+    <button
+      [ngClass]="progressBarColorClass"
+      type="button"
+      (click)="setProgressBarValue(-5)"
+      [disabled]="totalProgressBar <= 0"
+      >
+      <i class="fa fa-minus"></i>
+    </button>
+      </span>
+        <input
+        type="number"
+        class="form-control"
+        [ngClass]="{'is-invalid': totalProgressBar > 100 || totalProgressBar < 0}"
+        placeholder="progress"
+        (ngModelChange)="onProgresBarChange($event)"
+        [(ngModel)]="totalProgressBar"
+        >
+        <span class="input-group-btn">
+    <button
+      [ngClass]="progressBarColorClass"
+      type="button"
+      (click)="setProgressBarValue(5)"
+      [disabled]="totalProgressBar >= 100"
+      >
+      <i class="fa fa-plus"></i>
+    </button>
+  </span>
+</div>

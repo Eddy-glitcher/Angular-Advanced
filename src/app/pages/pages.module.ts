@@ -10,6 +10,8 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { FormsModule } from '@angular/forms';
 import { ComponentsModule } from '../components/components.module';
 
+import { NgChartsModule } from 'ng2-charts';
+
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -21,6 +23,7 @@ import { ComponentsModule } from '../components/components.module';
     CommonModule,
     FormsModule,
     RouterModule,
+    NgChartsModule,
     PagesRoutingModule,
     SharedModule,
     ComponentsModule

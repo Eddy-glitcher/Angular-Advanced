@@ -7,12 +7,20 @@ import { ChartData, ChartEvent, ChartType } from 'chart.js';
 })
 export class Grafic1Component {
 
-  inputProgressData ={
-    data: [400, 250, 250],
-    backgroundColor: ['#70D6FF','#FF70A6','#FF9770'],
-    hoverBackgroundColor: ['#70D6FF','#FF70A6','#FF9770'],
-    hoverBorderColor:['#000000','#000000','#000000']
-  };
+  inputProgressData = [
+    {
+      data: [400, 250, 250],
+      backgroundColor: ['#70D6FF','#FF70A6','#FF9770'],
+      hoverBackgroundColor: ['#70D6FF','#FF70A6','#FF9770'],
+      hoverBorderColor:['#000000','#000000','#000000']
+    }
+  ];
+
+  labels : string[] = [
+    'Products Sales',
+    'In-Store Products',
+    'Mail-Order Products',
+  ];
 
     // Doughnut
     public doughnutChartLabels: string[] = [

@@ -8,29 +8,19 @@ import { ChartData, ChartEvent, ChartType } from 'chart.js';
 })
 export class CustomGraficComponent implements OnInit {
 
+  @Input() title: string = 'Grafic Custom Component';
+  @Input() labels: string[] = [];
+  @Input() inputProgressData: any = {};
 
   ngOnInit(): void {
-    this.doughnutChartData.datasets[0] = this.inputProgressData;
+    this.doughnutChartData.datasets = this.inputProgressData;
+    this.doughnutChartData.labels = this.labels;
   }
 
-  @Input() inputProgressData : any ={
-    data: [350, 450, 100],
-    backgroundColor: ['#2362F2','#4523F9','#4562F2'],
-    hoverBackgroundColor: ['#2362F2','#4523F9','#4562F2'],
-    hoverBorderColor:['#000000','#000000','#000000']
-  };
-
   // Doughnut
-  public doughnutChartLabels: string[] = [
-    'Products Sales',
-    'In-Store Products',
-    'Mail-Order Products',
-  ];
   public doughnutChartData: ChartData<'doughnut'> = {
-    labels: this.doughnutChartLabels,
-    datasets: [
-      this.inputProgressData
-    ],
+    labels: [],
+    datasets: []
   };
   public doughnutChartType: ChartType = 'doughnut';
 

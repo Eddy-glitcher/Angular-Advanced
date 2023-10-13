@@ -5,7 +5,8 @@ import { PagesRoutingModule } from './pages/pages-routing.module';
 import { AuthRoutingModule } from './auth/auth-routing.module';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full'}
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+  { path: '**', component: NopagefoundComponent, pathMatch: 'full' },
 ]
 @NgModule({
   imports: [

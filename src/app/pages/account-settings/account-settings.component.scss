@@ -1,0 +1,12 @@
+#themecolors{
+
+  .selector{
+    transition: transform 200ms ease-in-out;
+  }
+
+  .selector:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+
+}

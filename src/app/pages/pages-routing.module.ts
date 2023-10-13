@@ -6,6 +6,7 @@ import { Grafic1Component } from './grafic1/grafic1.component';
 import { PagesComponent } from './pages.component';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 import { NopagefoundComponent } from '../nopagefound/nopagefound.component';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 
 const routes: Routes = [
   { path: 'dashboard',
@@ -14,12 +15,10 @@ const routes: Routes = [
     { path: '', component: DashboardComponent },
     { path: 'progress', component: ProgressBarComponent },
     { path: 'grafic1', component: Grafic1Component },
+    { path: 'account-settings', component: AccountSettingsComponent },
   ]
   },
-  {
-    path: '**',
-    component : NopagefoundComponent
-  }
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 ];
 
 @NgModule({

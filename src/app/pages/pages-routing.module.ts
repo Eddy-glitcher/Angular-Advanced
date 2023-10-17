@@ -7,6 +7,8 @@ import { PagesComponent } from './pages.component';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 import { NopagefoundComponent } from '../nopagefound/nopagefound.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { PromisesComponent } from './promises/promises.component';
+import { RxjsComponent } from './rxjs/rxjs.component';
 
 const routes: Routes = [
   { path: 'dashboard',
@@ -16,6 +18,8 @@ const routes: Routes = [
     { path: 'progress', component: ProgressBarComponent },
     { path: 'grafic1', component: Grafic1Component },
     { path: 'account-settings', component: AccountSettingsComponent },
+    { path: 'promises', component: PromisesComponent },
+    { path: 'rxjs', component: RxjsComponent },
   ]
   },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

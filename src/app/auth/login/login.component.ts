@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { AfterViewInit, Component, ElementRef, NgZone, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
@@ -36,7 +36,7 @@ export class LoginComponent implements AfterViewInit{
     remember : [false]
   });
 
-  constructor(private router : Router, private formBuilder : FormBuilder, private UserService : UserService, private ngZone : NgZone){
+  constructor(private router : Router, private formBuilder : FormBuilder, private UserService : UserService){
     let localEmail = localStorage.getItem('email');
     if(localEmail){
       this.formLogin.get('email')?.setValue(JSON.parse(localEmail || ''));
@@ -68,10 +68,8 @@ export class LoginComponent implements AfterViewInit{
       next : (resp) => {
         console.log(resp);
 
-        this.ngZone.run(()=>{
           // Navegamos al dashboard!
           this.router.navigateByUrl('/dashboard');
-        });
         // Inicio de sesion exitoso alerta
 
         Swal.fire({
@@ -108,10 +106,8 @@ export class LoginComponent implements AfterViewInit{
           localStorage.removeItem('email');
         };
 
-        this.ngZone.run(()=>{
-          // Navegamos al dashboard!
-          this.router.navigateByUrl('/dashboard');
-        });
+        // Navegamos al dashboard!
+        this.router.navigateByUrl('/dashboard');
 
         // Inicio de sesion exitoso Alerta
         Swal.fire({

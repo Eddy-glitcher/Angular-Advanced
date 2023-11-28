@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+
+  constructor(private UserService : UserService){}
+
+  logOut(): void{
+    this.UserService.logOut();
+  };
 
 }

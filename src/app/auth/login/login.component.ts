@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
@@ -12,7 +12,7 @@ declare const google: any;
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements AfterViewInit{
+export class LoginComponent implements AfterViewInit, OnInit{
 
   @ViewChild('btnGoogle') btnGoogle!: ElementRef<HTMLElement>;
 
@@ -31,8 +31,8 @@ export class LoginComponent implements AfterViewInit{
   });
 
   formLogin  = this.formBuilder.group({
-    email    : ['', [Validators.required, Validators.email]],
-    password : ['javieee', [Validators.required]],
+    email    : ['camilo@hotmail.com', [Validators.required, Validators.email]],
+    password : ['55555', [Validators.required]],
     remember : [false]
   });
 
@@ -43,16 +43,20 @@ export class LoginComponent implements AfterViewInit{
     };
   };
 
+  ngOnInit(): void {
+    this.UserService.logOut();
+  };
+
   ngAfterViewInit(): void {
     this.googleAuthInit();
   };
 
   googleAuthInit(){
-    google.accounts.id.initialize({
-      client_id: "820936875597-e7h6f7kpt7j1n8t7254nliutom41rovl.apps.googleusercontent.com",
-      callback: (response: any) => this.handleCredentialResponse(response)
-      // Evitamos que la referencia al this en en handle metodo no cambie
+
+    this.UserService.googleInit().then ((response) => {
+      this.handleCredentialResponse(response);
     });
+
     google.accounts.id.renderButton(
       // document.getElementById("buttonDiv"),
       this.btnGoogle.nativeElement,

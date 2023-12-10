@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {FormBuilder, FormControlOptions, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2'
@@ -14,7 +14,7 @@ export class RegisterComponent {
 
     public formSubmitted: boolean = false;
 
-    public registerForm = this.formBuilder.group({
+    public registerForm : FormGroup = this.formBuilder.group({
       name     : ['Edier', Validators.required],
       email    : ['edier@hotmail.com', [ Validators.required, Validators.email ]],
       password : ['123', Validators.required],
@@ -22,7 +22,7 @@ export class RegisterComponent {
       terms : [false, Validators.required],
     }, {
       validators : this.equalPasswords('password', 'confirmPassword')
-    });
+    } as FormControlOptions);
 
     constructor(private formBuilder : FormBuilder, private UserService : UserService, private router : Router){}
 
@@ -32,7 +32,7 @@ export class RegisterComponent {
       if(this.registerForm.invalid){
         console.log("Error al crear el usuario!");
         return;
-      }
+      };
 
       if(this.registerForm.get('terms')?.value){
         this.UserService.createUser(this.registerForm.value).subscribe({

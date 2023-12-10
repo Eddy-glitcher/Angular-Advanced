@@ -8,7 +8,6 @@ import { FormLogin } from '../interfaces/login-form.interface';
 import { Router } from '@angular/router';
 
 declare const google : any;
-
 @Injectable({
   providedIn: 'root'
 })
@@ -16,7 +15,7 @@ export class UserService {
 
   private baseUrl = environment.url;
 
-  constructor( private http : HttpClient, private router : Router) { };
+  constructor( private http : HttpClient, private router : Router) {};
 
   createUser(formData: RegisterForm): Observable<any>{
     // console.log("Creando Usuario!!", url );
@@ -40,6 +39,7 @@ export class UserService {
     return this.http.post(url , formData).pipe(
       tap(
         (resp: any) => {
+          console.log(resp);
           localStorage.setItem('token', JSON.stringify(resp.token));
         }
       ),
@@ -48,6 +48,16 @@ export class UserService {
     );
   };
 
+  googleInit(): Promise<any> {
+    return new Promise( (resolve) => {
+      google.accounts.id.initialize({
+        client_id: "820936875597-e7h6f7kpt7j1n8t7254nliutom41rovl.apps.googleusercontent.com",
+        callback: (response: any) => resolve(response)
+        // Evitamos que la referencia al this en en handle metodo no cambie
+      });
+    });
+  };
+  
   logInGoogle(token: any): Observable<any>{
     // console.log("Loggeando Usuario!!", url );
 
@@ -95,6 +105,9 @@ export class UserService {
 
   logOut(): void{
     localStorage.removeItem('token');
+
+    this.googleInit();
+
     google.accounts.id.revoke('luisgonzales6893@gmail.com', ()=>{
       this.router.navigateByUrl('/login');
     });

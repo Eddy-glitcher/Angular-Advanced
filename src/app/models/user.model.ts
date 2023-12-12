@@ -1,3 +1,6 @@
+import { environment } from '../../environments/environment';
+
+const url = environment.url;
 export class User {
   constructor(
 
@@ -11,5 +14,19 @@ export class User {
       public role      ?: string,
       public uid       ?: string
     ) {};
+
+    // http://localhost:3000/api/uploads/users/
+    get getUserImage(): string{
+
+      if(this.image.includes('https')){
+        return this.image;
+      };
+
+      if(this.image){
+        console.log(this.image);
+        return `${url}/api/uploads/users/${this.image}`;
+      };
+      return `${url}/api/uploads/users/no-image`;
+    };
 
 };

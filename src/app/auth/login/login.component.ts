@@ -31,7 +31,7 @@ export class LoginComponent implements AfterViewInit, OnInit{
   });
 
   formLogin  = this.formBuilder.group({
-    email    : ['camilo@hotmail.com', [Validators.required, Validators.email]],
+    email    : ['bellingham@hotmail.com', [Validators.required, Validators.email]],
     password : ['55555', [Validators.required]],
     remember : [false]
   });

@@ -6,6 +6,7 @@ import { Observable, catchError, of, retry, throwError } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { FormLogin } from '../interfaces/login-form.interface';
 import { Router } from '@angular/router';
+import { User } from '../models/user.model';
 
 declare const google : any;
 @Injectable({
@@ -13,6 +14,7 @@ declare const google : any;
 })
 export class UserService {
 
+  public activeUser!: User;
   private baseUrl = environment.url;
 
   constructor( private http : HttpClient, private router : Router) {};
@@ -57,7 +59,7 @@ export class UserService {
       });
     });
   };
-  
+
   logInGoogle(token: any): Observable<any>{
     // console.log("Loggeando Usuario!!", url );
 
@@ -90,6 +92,10 @@ export class UserService {
     }).pipe(
       tap(
         (resp: any)=>{
+
+          console.log(resp);
+          const { name, email, image, role, uid } = resp.user;
+          this.activeUser = new User(name, email, image, role, uid);
           localStorage.setItem('token', JSON.stringify(resp.token));
         }
       ),

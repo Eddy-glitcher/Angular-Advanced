@@ -19,19 +19,26 @@ export class UserService {
 
   constructor( private http : HttpClient, private router : Router) {};
 
-  createUser(formData: RegisterForm): Observable<any>{
-    // console.log("Creando Usuario!!", url );
+  get getCurrentToken() : string{
+      return localStorage.getItem('token') || '';
+  };
 
-    const url = `${this.baseUrl}/users`;
-    return this.http.post(url , formData).pipe(
+  get getCurrentUserId(): string{
+    return this.activeUser.uid || '';
+  };
+
+  createUser(formData: RegisterForm): Observable<any>{
+
+    const url = `${this.baseUrl}/api/users`;
+
+    return this.http.post(url, formData).pipe(
       tap(
         (resp: any) => {
-          localStorage.setItem('token', JSON.stringify(resp.token));
+          localStorage.setItem('token', resp.token);
         }
       ),
-      retry(1),
       catchError( (error: HttpErrorResponse) => throwError(()=>error))
-    );
+    )
   };
 
   logIn(formData: FormLogin): Observable<any>{
@@ -41,11 +48,9 @@ export class UserService {
     return this.http.post(url , formData).pipe(
       tap(
         (resp: any) => {
-          console.log(resp);
-          localStorage.setItem('token', JSON.stringify(resp.token));
+          localStorage.setItem('token', resp.token);
         }
       ),
-      retry(1),
       catchError( (error: HttpErrorResponse) => throwError(()=>error))
     );
   };
@@ -70,38 +75,49 @@ export class UserService {
           localStorage.setItem('token', JSON.stringify(resp.token));
         }
       ),
-      retry(1),
       catchError( (error: HttpErrorResponse) => throwError(()=>error))
     );
   };
 
-  validateToken (): Observable<boolean>{
+  // TODO: Crear una interfaz para la data recibida a la hora de actualizar un usuario
+  updateUser(formData : any): Observable<any>{
+    const url = `${this.baseUrl}/api/users/${this.getCurrentUserId}`;
 
-    let token = localStorage.getItem('token') || '';
-
-    if(token){
-      token = JSON.parse(token);
+    formData = {
+      ...formData,
+      role : this.activeUser.role
     };
+
+    return this.http.put(url, formData, {
+      headers : {
+        'token' : this.getCurrentToken
+      }
+    }).pipe(
+      tap( resp => resp),
+      catchError( (error: HttpErrorResponse) => throwError(()=>error) )
+    );
+  };
+
+
+  // El problema del registro de usuarios, ocurre cuando validamos el token desde el guard.
+  validateToken (): any{
 
     const url = `${this.baseUrl}/api/login/renew`;
 
     return this.http.get(url, {
       headers : {
-        'token' : token
+        'token' : this.getCurrentToken
       }
     }).pipe(
-      tap(
-        (resp: any)=>{
-
-          console.log(resp);
-          const { name, email, image, role, uid } = resp.user;
-          this.activeUser = new User(name, email, image, role, uid);
-          localStorage.setItem('token', JSON.stringify(resp.token));
-        }
-      ),
       map(
-        (resp)=>{
-          return resp.ok;
+        (resp: any) => {
+          console.log("Respuesta back Token validate: ", resp);
+          const { name, email, image = '', role, uid, google } = resp.user;
+          this.activeUser = new User(name, email, image, role, uid, google);
+
+          console.log("Token guardado: ", resp.token);
+          localStorage.setItem('token', resp.token);
+          return true;
         }
       ),
       catchError( (error: HttpErrorResponse) => of(false))

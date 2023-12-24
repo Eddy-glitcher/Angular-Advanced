@@ -10,25 +10,25 @@ export const AuthGuard: CanActivateFn=(route : ActivatedRouteSnapshot, state: Ro
   const router      = inject(Router);
 
   return authService.validateToken()
-  .pipe(
-    tap(
-      (isAuth: boolean)=>{
-        console.log(isAuth);
+    .pipe(
+      tap(
+        (isAuth: boolean)=>{
 
-        if (!isAuth) {
-          // TODO: UN alert para notificar que no son credenciales válidas?????....
-          router.navigateByUrl('/login');
+          console.log("Autoriado: ", isAuth);
 
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Sesión Cerrada",
-            showConfirmButton: false,
-            timer: 1500
-          });
-        };
+          if (!isAuth) {
+            // TODO: UN alert para notificar que no son credenciales válidas?????....
+            router.navigateByUrl('/login');
 
-      }
-    )
-  );
-};
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Sesión Cerrada",
+              showConfirmButton: false,
+              timer: 1500
+            });
+          };
+        }
+      )
+    );
+}

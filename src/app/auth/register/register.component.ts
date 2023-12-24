@@ -37,29 +37,23 @@ export class RegisterComponent {
       if(this.registerForm.get('terms')?.value){
         this.UserService.createUser(this.registerForm.value).subscribe({
           next  : (user : any) => {
-            console.log(user);
-
             Swal.fire({
-              title: 'Usuario Creado!',
+              title: 'Usuario Creado Correctamente!',
               icon: 'success',
               confirmButtonText: 'ok'
             });
 
-            // Sesión iniciada
+            // Navegar al dashboard
             this.router.navigateByUrl('/dashboard');
 
-            // Inicio de sesion exitoso Alerta
             Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title: "Iniciaste Sesión",
-              showConfirmButton: false,
-              timer: 1500
+              title: 'Error al crear el token y redireccionar!',
+              icon: 'error',
+              confirmButtonText: 'ok'
             });
-
           },
           error : (error : HttpErrorResponse) => {
-            console.log(error.error);
+            console.log("Hay un error: ",error);
             Swal.fire({
               title: 'Error!',
               text: error.error.msj,
@@ -69,6 +63,7 @@ export class RegisterComponent {
           }
         });
       };
+
     };
 
     invalidFormField(field : any): boolean{

@@ -152,23 +152,25 @@
               <!-- Profile -->
               <!-- ============================================================== -->
               <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img [src]="imgUrl" alt="user" class="profile-pic" /></a>
+                  <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{activeUser.getUserImage}}" alt="user" class="profile-pic" /></a>
                   <div class="dropdown-menu dropdown-menu-right animated fadeIn fast-animated">
                       <ul class="dropdown-user">
                           <li>
                               <div class="dw-user-box">
-                                  <div class="u-img"><img [src]="imgUrl" alt="user"></div>
+                                  <div class="u-img"><img src="{{activeUser.getUserImage}}" alt="user"></div>
                                   <div class="u-text">
                                       <h4>{{activeUser.name}}</h4>
-                                      <p class="text-muted">{{activeUser.email}}</p><a href="pages-profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+                                      <p class="text-muted">
+                                        {{activeUser.email | slice:0:20}} {{(activeUser.email.length > 20) ? '...' : '' }}
+                                      </p><a href="pages-profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
                               </div>
                           </li>
                           <li role="separator" class="divider"></li>
-                          <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
+                          <li><a href="javascript:void()" routerLink="./profile"><i class="ti-user"></i> My Profile</a></li>
                           <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
                           <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
                           <li role="separator" class="divider"></li>
-                          <li><a href="#" routerLink="./account-settings" ><i class="ti-settings"></i> Account Setting</a></li>
+                          <li><a href="#" routerLink="./account-settings"><i class="ti-settings"></i> Account Setting</a></li>
                           <li role="separator" class="divider"></li>
                           <li ><a href="#" (click)="logOut()"><i class="fa fa-power-off"></i> Logout</a></li>
                       </ul>

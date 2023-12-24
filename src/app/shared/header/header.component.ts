@@ -9,11 +9,9 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class HeaderComponent {
 
-  public imgUrl     : string = '';
   public activeUser : User;
 
   constructor(private UserService : UserService){
-    this.imgUrl     = UserService.activeUser.getUserImage;
     this.activeUser = UserService.activeUser;
   };
 

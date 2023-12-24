@@ -31,7 +31,7 @@ export class LoginComponent implements AfterViewInit, OnInit{
   });
 
   formLogin  = this.formBuilder.group({
-    email    : ['bellingham@hotmail.com', [Validators.required, Validators.email]],
+    email    : ['eyyjude@hotmail.com', [Validators.required, Validators.email]],
     password : ['55555', [Validators.required]],
     remember : [false]
   });
@@ -110,6 +110,8 @@ export class LoginComponent implements AfterViewInit, OnInit{
           localStorage.removeItem('email');
         };
 
+        console.log("Sesion iniciada: ",resp);
+
         // Navegamos al dashboard!
         this.router.navigateByUrl('/dashboard');
 
@@ -117,7 +119,7 @@ export class LoginComponent implements AfterViewInit, OnInit{
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Iniciaste Sesión",
+          title: "¡Binvenido!",
           showConfirmButton: false,
           timer: 1500
         });

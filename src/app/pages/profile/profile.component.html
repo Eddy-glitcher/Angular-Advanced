@@ -1,0 +1,126 @@
+<div class="row">
+  <div class="col-lg-6">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Sample Horizontal Form with Icons</h4>
+            <h6 class="card-subtitle">Use Bootstrap's predefined grid classes for horizontal form</h6>
+            <form class="form-horizontal p-t-20" [formGroup]="updateForm">
+                <div class="form-group row">
+                    <label for="exampleInputuname3" class="col-sm-3 control-label">Username*</label>
+                    <div class="col-sm-9">
+                        <div class="input-group" [ngClass]="formControlValid('name') ? 'has-danger' : ''">
+                            <div class="input-group-addon"><i class="ti-user"></i></div>
+                            <input type="text"
+                              class="form-control"
+                              [ngClass]="formControlValid('name') ? 'form-control-danger' : ''"
+                              id="exampleInputuname3"
+                              placeholder="Username"
+                              formControlName="name"
+                              >
+                            </div>
+                            <small *ngIf="formControlValid('name')">Campo requerrido</small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="exampleInputEmail3" class="col-sm-3 control-label">Email*</label>
+                    <div class="col-sm-9">
+                        <div class="input-group" [ngClass]="formControlValid('email') ? 'has-danger' : ''">
+                            <div class="input-group-addon"><i class="ti-email"></i></div>
+                            <input type="email"
+                            class="form-control"
+                            [ngClass]="formControlValid('name') ? 'form-control-danger' : ''"
+                            id="exampleInputEmail3"
+                            placeholder="Enter email"
+                            formControlName="email"
+                            readOnly="currentUser.google"
+                            >
+                        </div>
+                        <small *ngIf="formControlValid('email')">Campo requerrido</small>
+                    </div>
+                </div>
+                <!-- <div class="form-group row">
+                    <label for="web" class="col-sm-3 control-label">Role</label>
+                    <div class="col-sm-9">
+                        <div class="input-group" [ngClass]="formControlValid('role') ? 'has-danger' : ''">
+                            <div class="input-group-addon"><i class="ti-star"></i></div>
+                            <input type="text"
+                            class="form-control"
+                            [ngClass]="formControlValid('role') ? 'form-control-danger' : ''"
+                            id="web"
+                            placeholder="Enter your User Role"
+                            formControlName="role"
+                            >
+                        </div>
+                        <small *ngIf="formControlValid('role')">Campo requerrido</small>
+                    </div>
+                </div> -->
+                <!-- <div class="form-group row">
+                    <label for="inputPassword4" class="col-sm-3 control-label">Password*</label>
+                    <div class="col-sm-9">
+                        <div class="input-group" [ngClass]="formControlValid('role') ? 'has-danger' : ''">
+                            <div class="input-group-addon"><i class="ti-lock"></i></div>
+                            <input type="password"
+                            class="form-control"
+                            [ngClass]="formControlValid('password') ? 'form-control-danger' : ''"
+                            id="exampleInputpwd4"
+                            placeholder="Enter pwd"
+                            formControlName="password"
+                            >
+                        </div>
+                        <small *ngIf="formControlValid('password')">Campo requerrido</small>
+                    </div>
+                </div> -->
+                <!-- <div class="form-group row">
+                    <label for="inputPassword5" class="col-sm-3 control-label">Re Password*</label>
+                    <div class="col-sm-9">
+                        <div class="input-group" [ngClass]="formControlValid('confirmPassword') ? 'has-danger' : ''">
+                            <div class="input-group-addon"><i class="ti-lock"></i></div>
+                            <input type="password"
+                            class="form-control"
+                            [ngClass]="formControlValid('confirmPassword') ? 'form-control-danger' : ''"
+                            id="exampleInputpwd5"
+                            placeholder="Re Enter pwd"
+                            formControlName="confirmPassword"
+                            >
+                        </div>
+                        <small *ngIf="formControlValid('confirmPassword')">Campo requerrido</small>
+                    </div>
+                </div> -->
+                <div class="form-group row m-b-0">
+                    <div class="offset-sm-3 col-sm-9">
+                        <button type="submit" class="btn btn-success waves-effect waves-light" (click)="updateUser()">Update</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
+
+  <div class="col-lg-6">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Avatar</h4>
+            <h6 class="card-subtitle">Imágen del Usuario</h6>
+
+            <div class="img-container text-center img-avatar">
+
+              <img *ngIf="!temporaryImage" src="{{currentUser.getUserImage}}" alt="User Image">
+              <img [src]="temporaryImage" alt="User Image">
+
+            </div>
+            <input type="file" (change)="changeImage($event)">
+            <br>
+            <br>
+            <div class="form-group row m-b-0">
+              <div class="offset-sm-3 col-sm-9">
+                  <button type="submit"
+                  class="btn btn-success waves-effect waves-light"
+                  [disabled]="!uploadedImage"
+                  (click)="uploadIMage()"
+                  >Update</button>
+              </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>

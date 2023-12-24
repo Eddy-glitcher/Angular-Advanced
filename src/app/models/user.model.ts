@@ -9,10 +9,10 @@ export class User {
       public name       : string,
       public email      : string,
       public image      : string,
-      public passsword ?: string,
-      public google    ?: boolean,
       public role      ?: string,
-      public uid       ?: string
+      public uid       ?: string,
+      public google    ?: boolean,
+      public passsword ?: string
     ) {};
 
     // http://localhost:3000/api/uploads/users/
@@ -23,9 +23,9 @@ export class User {
       };
 
       if(this.image){
-        console.log(this.image);
         return `${url}/api/uploads/users/${this.image}`;
       };
+
       return `${url}/api/uploads/users/no-image`;
     };
 

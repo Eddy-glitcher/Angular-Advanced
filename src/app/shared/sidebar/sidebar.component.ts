@@ -10,13 +10,11 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class SidebarComponent {
 
-  public imgUrl     : string = '';
   public activeUser : User;
   menuItems : any[] = [];
 
   constructor( private sideBarService: SideBarService, private UserService : UserService){
     this.menuItems  = this.sideBarService.menu;
-    this.imgUrl     = UserService.activeUser.getUserImage;
     this.activeUser = UserService.activeUser;
   };
 
